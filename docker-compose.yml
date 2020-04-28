@@ -1,0 +1,39 @@
+version: '3'
+services:
+  api:
+    image: babak1199/simple-restapi
+    container_name: simple-restapi
+    build: .
+    networks:
+      - backend
+    ports:
+      - "3600:3600"
+    depends_on:
+      - database
+
+  database:
+    image: 'mongo'
+    container_name: simple-restapi-db
+    environment: 
+      - MONDO_INITDB_DATABASE=simple-restapi
+      - MONDO_INITDB_ROOT_USERNAME=dbuser
+      - MONDO_INITDB_ROOT_PASSWORD=AdminSimplePassword
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ./mongo-volume:/data/db
+    networks:
+      - backend
+    ports:
+      - '27017-27019:27017-27019'
+
+  # web-cli:
+  #   image: babak1199/simple-restapi
+  #   links:
+  #     - database
+  #   networks:
+  #     - backend
+  #   command: sh
+
+networks:
+  backend:
+    driver: bridge
