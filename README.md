@@ -13,3 +13,12 @@ db.Users.insert({
   permissionLevel: 2048
 })
 ```
+
+##Running Application
+
+Use the following command to start the service
+```
+docker-compose up
+```
+
+[Serving Address on port 3600](https://localhost:3600)
