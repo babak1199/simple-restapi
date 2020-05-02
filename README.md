@@ -19,7 +19,7 @@ docker-compose up
 #### 1. At first, we need to hash our user's password by running the following command:
 
 ```powershell
-PS node .\createUserManually.js WhaleDeepDive@4354
+PS node .\hashPassword.js WhaleDeepDive@4354
 ```
 
 A hashed password will be created which we'll be using in the next step:
