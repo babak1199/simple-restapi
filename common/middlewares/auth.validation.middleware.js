@@ -24,9 +24,9 @@ exports.validRefreshNeeded = (req, res, next) => {
 
 
 exports.validJWTNeeded = (req, res, next) => {
-    if (req.headers['authorization']) {
+    if (req.headers.authorization) {
         try {
-            let authorization = req.headers['authorization'].split(' ');
+            let authorization = req.headers.authorization.split(' ');
             if (authorization[0] !== 'Bearer') {
                 return res.status(401).send();
             } else {
@@ -35,7 +35,11 @@ exports.validJWTNeeded = (req, res, next) => {
             }
 
         } catch (err) {
-            return res.status(403).send();
+
+            let token = req.headers.authorization.split(' ')[1];
+            return res.status(403).send({
+                sentToken: token
+            });
         }
     } else {
         return res.status(401).send();
