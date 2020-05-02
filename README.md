@@ -14,11 +14,30 @@ db.Users.insert({
 })
 ```
 
-##Running Application
+## Running Application
 
 Use the following command to start the service
 ```
+docker-compose build
 docker-compose up
 ```
 
 [Serving Address on port 3600](https://localhost:3600)
+
+## Create the first user
+```
+PS Invoke-WebRequest -Uri http://localhost:3600/users -Body (@{firstName='John'; lastName='Doe'; email='admin@sample.com'; password='WhaleDeepDive@4354'; permissionLevel=2048}|ConvertTo-Json) -ContentType application/json -Method POST
+```
+
+## Get JWT Token
+
+```
+PS $res = Invoke-RestMethod -Uri http://localhost:3600/auth -Body (@{email='admin@sample.com';password='WhaleDeepDive@4354'}|ConvertTo-Json) -ContentType application/json -Method POST
+```
+
+## Use JWT Token to Get Data
+
+```
+PS Invoke-RestMethod -Uri http://localhost:3600/users -Headers @{"Authorization"="bearer " + $res.accessToken}
+```
+
