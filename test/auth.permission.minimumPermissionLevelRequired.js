@@ -5,6 +5,17 @@ const ADMIN = config.permissionLevels.ADMIN;
 const PAID = config.permissionLevels.PAID_USER;
 const FREE = config.permissionLevels.NORMAL_USER;
 
+function getLevelName(level) {
+    switch(level) {
+        case ADMIN:
+            return 'ADMIN';
+        case PAID:
+            return 'PAID';
+    }
+
+    return '';
+};
+
 var middleware = PermissionMiddleware.minimumPermissionLevelRequired;
 
 var expect = require('chai').expect;
@@ -61,11 +72,11 @@ describe('minimum permission level middleware', function() {
 
     [
         ADMIN,
-        PAID,
-        FREE
-    ].forEach(function(requiredPermission) {
+        PAID
+    ]
+    .forEach(function(requiredPermission) {
 
-        describe(`request handling: ${requiredPermission} level permission check`, function() {
+        describe(`request handling: ${getLevelName(requiredPermission)} level permission check`, function() {
 
             var req, mw;
 
@@ -77,7 +88,7 @@ describe('minimum permission level middleware', function() {
             it('should call allow access for a user with ADMIN level permission', function() {
                 var nextSpy = sinon.spy();
                 req.jwt = setUserPermissionLevel(ADMIN);
-                var res = createHttpResponse();;
+                var res = createHttpResponse();
 
                 mw(req, res, nextSpy);
                 expect(nextSpy.calledOnce).to.be.true;
