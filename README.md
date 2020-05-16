@@ -74,6 +74,6 @@ PS $res = Invoke-RestMethod -Uri http://localhost:3600/auth -Body (@{email='admi
 ## Use JWT Token to Get Data
 
 ```powershell
-PS Invoke-RestMethod -Uri http://localhost:3600/users -Headers @{"Authorization"="bearer " + $res.accessToken}
+PS Invoke-RestMethod -Uri http://localhost:3600/users -Headers @{"Authorization"="Bearer " + $res.accessToken}
 ```
 
