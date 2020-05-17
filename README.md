@@ -58,9 +58,9 @@ password: 'WhaleDeepDive@4354'
 ```
 See [Get JWT Token](README.md#get-jwt-token)
 
-## Create Users
+## Add Users
 ```powershell
-PS Invoke-WebRequest -Uri http://localhost:3600/users -Body (@{firstName='John'; lastName='Doe'; email='admin@sample.com'; password='WhaleDeepDive@4354'; permissionLevel=2048}|ConvertTo-Json) -ContentType application/json -Method POST
+PS Invoke-WebRequest -Uri http://localhost:3600/users -Body (@{firstName='Daniel'; lastName='Grey'; email='daniel@sample.com'; phone='888-123-4567'; password='BasicPass@4354'; }|ConvertTo-Json) -ContentType application/json -Method POST
 ```
 Note: All the users created using `/users` endpoint will have `permissionLevel = 1`.
 
