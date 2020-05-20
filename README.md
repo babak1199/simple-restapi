@@ -37,11 +37,11 @@ docker exec -it simple-restapi_mongo_1 mongo
 ```
 
 #### 3. Run the following commands in the MongoDB container to create admin 
-```powersehll
+```
 > use simple-restapi
 switched to db simple-restapi
 
-> db.Users.insert({
+> db.users.insert({
   firstName: 'John',
   lastName: 'Doe',
   email: 'admin@sample.com',
@@ -58,12 +58,19 @@ password: 'WhaleDeepDive@4354'
 ```
 See [Get JWT Token](README.md#get-jwt-token)
 
-## Create the First User
+## Create Data
+
+### Add Users
 ```powershell
-PS Invoke-WebRequest -Uri http://localhost:3600/users -Body (@{firstName='John'; lastName='Doe'; email='admin@sample.com'; password='WhaleDeepDive@4354'; permissionLevel=2048}|ConvertTo-Json) -ContentType application/json -Method POST
+PS Invoke-WebRequest -Uri http://localhost:3600/users -Body (@{firstName='Daniel'; lastName='Grey'; email='daniel@sample.com'; phone='888-123-4567'; password='BasicPass@4354'; }|ConvertTo-Json) -ContentType application/json -Method POST
 ```
 Note: All the users created using `/users` endpoint will have `permissionLevel = 1`.
 
+### Add Subjects
+
+```powershell
+Invoke-WebRequest -Uri http://localhost:3600/subjects -Body (@{ text='kind'; icon='/assets/kind.png'; tags='atitude','personal'; }|ConvertTo-Json) -ContentType application/json -Headers @{"Authorization"="Bearer " + $res.accessToken} -Method POST
+```
 
 ## Get JWT Token
 
