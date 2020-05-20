@@ -1,16 +1,19 @@
-const PermissionMiddleware = require('../common/middlewares/auth.permission.middleware');
-const config = require('../common/config/env.config');
+const PermissionMiddleware = require('../lib/common/middlewares/auth.permission.middleware');
+const config = require('../lib/common/config/env.config');
 
 const ADMIN = config.permissionLevels.ADMIN;
 const PAID = config.permissionLevels.PAID_USER;
 const FREE = config.permissionLevels.NORMAL_USER;
 
+/**
+ * @param {Number} level
+ */
 function getLevelName(level) {
     switch(level) {
-        case ADMIN:
-            return 'ADMIN';
-        case PAID:
-            return 'PAID';
+    case ADMIN:
+        return 'ADMIN';
+    case PAID:
+        return 'PAID';
     }
 
     return '';
@@ -73,8 +76,7 @@ describe('minimum permission level middleware', function() {
     [
         ADMIN,
         PAID
-    ]
-    .forEach(function(requiredPermission) {
+    ].forEach(function(requiredPermission) {
 
         describe(`request handling: ${getLevelName(requiredPermission)} level permission check`, function() {
 
