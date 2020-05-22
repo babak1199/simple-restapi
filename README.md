@@ -58,29 +58,44 @@ password: 'WhaleDeepDive@4354'
 ```
 See [Get JWT Token](README.md#get-jwt-token)
 
+## Get JWT Token
+
+```powershell
+PS $res = Invoke-RestMethod -Uri http://localhost:3600/v1/auth -Body (@{email='admin@sample.com';password='WhaleDeepDive@4354'}|ConvertTo-Json) -ContentType application/json -Method POST
+```
+
+## Use JWT Token to Get Data
+
+```powershell
+PS Invoke-RestMethod -Uri http://localhost:3600/v1/users -Headers @{"Authorization"="Bearer " + $res.accessToken}
+```
+
+
 ## Create Data
 
 ### Add Users
 ```powershell
-PS Invoke-WebRequest -Uri http://localhost:3600/users -Body (@{firstName='Daniel'; lastName='Grey'; email='daniel@sample.com'; phone='888-123-4567'; password='BasicPass@4354'; }|ConvertTo-Json) -ContentType application/json -Method POST
+#Replace `v1` by the version of API you want to call - e.g. v1, v2
+PS Invoke-WebRequest -Uri http://localhost:3600/v1/users -Body (@{firstName='Daniel'; lastName='Grey'; email='daniel@sample.com'; phone='888-123-4567'; password='BasicPass@4354'; }|ConvertTo-Json) -ContentType application/json -Method POST
 ```
 Note: All the users created using `/users` endpoint will have `permissionLevel = 1`.
 
 ### Add Subjects
 
 ```powershell
-Invoke-WebRequest -Uri http://localhost:3600/subjects -Body (@{ text='kind'; icon='/assets/kind.png'; tags='atitude','personal'; }|ConvertTo-Json) -ContentType application/json -Headers @{"Authorization"="Bearer " + $res.accessToken} -Method POST
+PS Invoke-WebRequest -Uri http://localhost:3600/v1/subjects -Body (@{ text='kind'; icon='/assets/kind.png'; tags='atitude','personal'; }|ConvertTo-Json) -ContentType application/json -Headers @{"Authorization"="Bearer " + $res.accessToken} -Method POST
 ```
 
-## Get JWT Token
-
+### Add Tags
 ```powershell
-PS $res = Invoke-RestMethod -Uri http://localhost:3600/auth -Body (@{email='admin@sample.com';password='WhaleDeepDive@4354'}|ConvertTo-Json) -ContentType application/json -Method POST
+PS Invoke-WebRequest -Uri http://localhost:3600/v1/tags/personal -Headers @{"Authorization"="Bearer " + $res.accessToken} -Method PUT
 ```
 
-## Use JWT Token to Get Data
 
+## Modify Data
+
+### Modify Subjects
 ```powershell
-PS Invoke-RestMethod -Uri http://localhost:3600/users -Headers @{"Authorization"="Bearer " + $res.accessToken}
+PS Invoke-WebRequest -Uri http://localhost:3600/v1/subjects/5ec34ede338ad8001128154d -Body (@{ tags='5ec4ebc101e65a0011c5f853','5ec4ef9501e65a0011c5f854'; }|ConvertTo-Json) -ContentType application/json -Headers @{"Authorization"="Bearer " + $res.accessToken} -Method PATCH
 ```
 
