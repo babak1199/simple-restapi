@@ -81,12 +81,12 @@ PS Invoke-WebRequest -Uri http://localhost:3600/v1/tags/personal -Headers @{"Aut
 ## Get JWT Token
 
 ```powershell
-PS $res = Invoke-RestMethod -Uri http://localhost:3600/auth -Body (@{email='admin@sample.com';password='WhaleDeepDive@4354'}|ConvertTo-Json) -ContentType application/json -Method POST
+PS $res = Invoke-RestMethod -Uri http://localhost:3600/v1/auth -Body (@{email='admin@sample.com';password='WhaleDeepDive@4354'}|ConvertTo-Json) -ContentType application/json -Method POST
 ```
 
 ## Use JWT Token to Get Data
 
 ```powershell
-PS Invoke-RestMethod -Uri http://localhost:3600/users -Headers @{"Authorization"="Bearer " + $res.accessToken}
+PS Invoke-RestMethod -Uri http://localhost:3600/v1/users -Headers @{"Authorization"="Bearer " + $res.accessToken}
 ```
 
