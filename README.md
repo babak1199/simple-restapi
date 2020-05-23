@@ -13,6 +13,12 @@ docker-compose up
 
 [Run server at localhost:3600](https://localhost:3600)
 
+## Debugging
+Once containers run, you can connect to `MongoDB` database using:
+```cmd
+docker exec -it simple-restapi_mongo_1 mongo
+```
+
 
 ## Create a User Manually
 
