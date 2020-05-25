@@ -31,11 +31,32 @@
     "url": "git+https://github.com/babak1199/simple-restapi.git"
   },
   "keywords": [
+    "web",
+    "app",
+    "javascript",
+    "express",
+    "rest",
     "restapi",
-    "nodejs"
+    "api",
+    "node",
+    "nodejs",
+    "mongo",
+    "mongodb",
+    "jwt",
+    "jwt-authentication",
+    "i18n",
+    "token",
+    "eslint",
+    "mongoose",
+    "async",
+    "await",
+    "testing",
+    "mocha",
+    "chai",
+    "JSDoc"
   ],
   "author": "Babak Akbarzadeh",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/babak1199/simple-restapi/issues"
   },
@@ -50,7 +71,8 @@
     "node-uuid": "^1.4.8",
     "swagger-ui-express": "^4.1.4",
     "sync-request": "^6.1.0",
-    "uuid": "^7.0.3"
+    "uuid": "^7.0.3",
+    "validator": "^13.0.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
