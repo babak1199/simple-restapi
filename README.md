@@ -13,6 +13,12 @@ docker-compose up
 
 [Run server at localhost:3600](https://localhost:3600)
 
+## Debugging
+Once containers run, you can connect to `MongoDB` database using:
+```cmd
+docker exec -it simple-restapi_mongo_1 mongo
+```
+
 
 ## Create a User Manually
 
@@ -64,10 +70,17 @@ See [Get JWT Token](README.md#get-jwt-token)
 PS $res = Invoke-RestMethod -Uri http://localhost:3600/v1/auth -Body (@{email='admin@sample.com';password='WhaleDeepDive@4354'}|ConvertTo-Json) -ContentType application/json -Method POST
 ```
 
-## Use JWT Token to Get Data
 
+## Get Data
+
+### Get Users
 ```powershell
 PS Invoke-RestMethod -Uri http://localhost:3600/v1/users -Headers @{"Authorization"="Bearer " + $res.accessToken}
+```
+
+### Get Tags
+```powershell
+PS Invoke-RestMethod -Uri http://localhost:3600/v1/tags -Headers @{"Authorization"="Bearer " + $res.accessToken} | Format-List
 ```
 
 
