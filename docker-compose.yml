@@ -1,7 +1,7 @@
 version: '3'
 services:
   api:
-    image: babak1199/simple-restapi
+    image: cloud.canister.io:5000/babak1199/simple-restapi
     # container_name: simple-restapi
     build: .
     networks:

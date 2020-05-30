@@ -29,3 +29,4 @@ coverage
 # Nuxt.js build / generate output
 .nuxt
 dist
+simple-restapi.zip

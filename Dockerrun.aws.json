@@ -1,0 +1,51 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "volumes": [
+        {
+            "name": "mongo-database",
+            "host": {
+                "sourcePath": "/var/app/current/mongodata"
+            }
+        }
+    ],
+    "containerDefinitions": [
+        {
+            "name": "api",
+            "image": "cloud.canister.io:5000/babak1199/simple-restapi",
+            "essential": true,
+            "memory": 128,
+            "links": [
+                "mongo"
+            ],
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 3600
+                }
+            ]
+        },
+        {
+            "name": "mongo",
+            "image": "mongo",
+            "essential": true,
+            "memory": 128,
+            "portMappings": [
+                {
+                    "hostPort": 27017,
+                    "containerPort": 27017
+                }
+            ],
+            "mountPoints": [
+                {
+                    "sourceVolume": "mongo-database",
+                    "containerPath": "/data/db"
+                }
+            ]
+        }
+    ],
+    "authentication": {
+        "bucket": "simple-restapi-bucket",
+        "key": ".dockercfg"
+    }    
+}
+  

@@ -7,6 +7,8 @@ const bodyParser = require('body-parser');
 
 // let cache = apicache.middleware;
 
+const AWSXRay = require('aws-xray-sdk');
+
 const AuthorizationRouter = require('./lib/authorization/routes.config');
 const UsersRouter = require('./lib/users/routes.config');
 const SubjectsRouter = require('./lib/subjects/routes.config');
@@ -15,6 +17,8 @@ const TagsRouter = require('./lib/tags/routes.config');
 
 // TODO: configure proper caching strategy
 // app.use(cache('5 minutes'));
+
+app.use(AWSXRay.express.openSegment('SimpleRESTApiApp'));
 
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -43,3 +47,5 @@ TagsRouter.routesConfig(app);
 app.listen(config.port, function () {
     console.log('app listening at port %s', config.port);
 });
+
+app.use(AWSXRay.express.closeSegment());
