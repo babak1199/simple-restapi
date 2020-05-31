@@ -112,3 +112,8 @@ PS Invoke-WebRequest -Uri http://localhost:3600/v1/tags/personal -Headers @{"Aut
 PS Invoke-WebRequest -Uri http://localhost:3600/v1/subjects/5ec34ede338ad8001128154d -Body (@{ tags='5ec4ebc101e65a0011c5f853','5ec4ef9501e65a0011c5f854'; }|ConvertTo-Json) -ContentType application/json -Headers @{"Authorization"="Bearer " + $res.accessToken} -Method PATCH
 ```
 
+## Connection to AWS EC2 Elastic Beanstalk
+
+```
+eb ssh
+```
