@@ -112,6 +112,18 @@ PS Invoke-WebRequest -Uri http://localhost:3600/v1/tags/personal -Headers @{"Aut
 PS Invoke-WebRequest -Uri http://localhost:3600/v1/subjects/5ec34ede338ad8001128154d -Body (@{ tags='5ec4ebc101e65a0011c5f853','5ec4ef9501e65a0011c5f854'; }|ConvertTo-Json) -ContentType application/json -Headers @{"Authorization"="Bearer " + $res.accessToken} -Method PATCH
 ```
 
+## Hosing/Deployment - AWS EC2 Elastic Beanstalk
+
+## Deployment
+
+Run the following commands to build the `Docker` container and push it to the registry:
+```cmd
+docker-compose build
+
+docker push cloud.canister.io:5000/babak1199/simple-restapi
+```
+Compress the source folder to a `.zip` archive and deploy it to `AWS` by logging in to [AWS Elastic Beanstalk console](https://console.aws.amazon.com/elasticbeanstalk)
+
 ## Connection to AWS EC2 Elastic Beanstalk
 
 ```
