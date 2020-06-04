@@ -67,7 +67,7 @@ See [Get JWT Token](README.md#get-jwt-token)
 ## Get JWT Token
 
 ```powershell
-PS $res = Invoke-RestMethod -Uri http://localhost:3600/v1/auth -Body (@{email='admin@sample.com';password='WhaleDeepDive@4354'}|ConvertTo-Json) -ContentType application/json -Method POST
+PS $res = Invoke-RestMethod -Uri http://localhost:3600/v1/auth/login -Body (@{email='admin@sample.com';password='WhaleDeepDive@4354'}|ConvertTo-Json) -ContentType application/json -Method POST
 ```
 
 
@@ -112,3 +112,26 @@ PS Invoke-WebRequest -Uri http://localhost:3600/v1/tags/personal -Headers @{"Aut
 PS Invoke-WebRequest -Uri http://localhost:3600/v1/subjects/5ec34ede338ad8001128154d -Body (@{ tags='5ec4ebc101e65a0011c5f853','5ec4ef9501e65a0011c5f854'; }|ConvertTo-Json) -ContentType application/json -Headers @{"Authorization"="Bearer " + $res.accessToken} -Method PATCH
 ```
 
+## Hosing/Deployment - AWS EC2 Elastic Beanstalk
+
+## Deployment
+
+Run the following commands to build the `Docker` container and push it to the registry:
+```cmd
+docker-compose build
+
+docker push cloud.canister.io:5000/babak1199/simple-restapi
+```
+Compress the source folder to a `.zip` archive and deploy it to `AWS` by logging in to [AWS Elastic Beanstalk console](https://console.aws.amazon.com/elasticbeanstalk)
+
+## Connection to AWS EC2 Elastic Beanstalk
+
+```
+eb ssh
+```
+
+## Transferring Files To/From Elastic Beanstalk
+
+```cmd
+scp -i C:\Users\bakbarzadeh\.ssh\aws-eb ec2-user@54.158.109.176:/home/ec2-user/test/db/* .
+```
