@@ -133,5 +133,6 @@ eb ssh
 ## Transferring Files To/From Elastic Beanstalk
 
 ```cmd
-scp -i C:\Users\bakbarzadeh\.ssh\aws-eb ec2-user@54.158.109.176:/home/ec2-user/test/db/* .
+:: Replace the IP address
+scp -r -i C:\Users\bakbarzadeh\.ssh\aws-eb ec2-user@54.158.109.176:/home/ec2-user/test/db/* .
 ```
