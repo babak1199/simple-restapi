@@ -68,7 +68,7 @@
     "express-validator": "^6.5.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
-    "moment-timezone": "^0.5.28",
+    "moment-timezone": "^0.5.35",
     "mongoose": "^5.9.10",
     "node-uuid": "^1.4.8",
     "swagger-ui-express": "^4.1.4",
